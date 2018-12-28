@@ -12,4 +12,11 @@ dotfiles=(
   .config/i3status/config
 )
 
-for i in ${dotfiles[@]}; do curl -L $repo/$i > $HOME/$i; done
+for i in ${dotfiles[@]};
+do
+  dir=$(dirname $i)
+  if [ ! -d $dir ]; then
+    mkdir -p $dir
+  fi
+  curl -L $repo/$i > $HOME/$i
+done
